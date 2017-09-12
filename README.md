@@ -8,10 +8,10 @@ Please make sure you have cloned this repository and run all the installation in
 
 ## Requirements
 
-*   NodeJS >= v7.10.0 and npm >= 4 [Installation Instructions](https://nodejs.org/en/download). Do not use NodeJS 8 or npm 5, they are broken currently.
-*   Install refmt, ocamlmerlin and ocamlmerlin-reason according to [reasonml js workflow](https://facebook.github.io/reason/jsWorkflow.html#javascript-workflow-editor-setup-global-utilities).
-    (basically just run: `npm install -g git://github.com/reasonml/reason-cli.git#beta-v-1.13.5`)
-*   Please follow the [reasonml tooling instructions](https://facebook.github.io/reason/tools.html#editor-integration) to set up your text editor. At time of writing this, the following editors are supported:
+*   NodeJS >= v7.10.0 and npm >= 4 [Installation Instructions](https://nodejs.org/en/download).
+*   Install refmt, ocamlmerlin and ocamlmerlin-reason according to [reasonml js workflow](https://reasonml.github.io/guide/editor-tools/global-installation).
+    (basically just run: `npm install -g git://github.com/reasonml/reason-cli.git#beta-v-1.13.6`)
+*   Please follow the [reasonml tooling instructions](https://reasonml.github.io/guide/editor-tools/) to set up your text editor. At time of writing this, the following editors are supported:
     *   vim / neovim
     *   emacs
     *   atom
@@ -40,7 +40,9 @@ Before attending the workshop!!!
 
 Once you have the repository cloned and the dependencies installed, please run the following command to test the installation. From inside the root of the repository (the folder you just cloned into) run the following command:
 
+```
 npm run watch
+```
 
 You should see a lot of output on your terminal, and after a few seconds you should be able to visit `localhost:8080` and see a webpage on the screen.
 

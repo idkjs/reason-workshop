@@ -12,40 +12,47 @@ Building off the work done last 3, this problem wraps up what you've learnt so f
 In reason's react bindings, state is defined as a record type available to the make function of a component. The shape of the make function is similar to what we saw in [problem1](/problems/1) with the addition of two new properties: state and initialState.
 
 ```reason
-type state = { count: int, startingCount: int };
-/*
-  creates a stateful component with a displyName "Counter".
-  requires the make function that spreads the component to define:
-    * let initialState = fun () => state;
-    * let render = fun componentBag => ReasonReact.reactElement;
-*/
-let component = ReasonReact.statefulComponent "Counter";
+type state = {
+  count: int,
+  startingCount: int
+};
+
+type action =
+  | Click;
 
 /*
-  define a function make that takes one prop, startingCount which has a default value of 0.
-  also takes children, which we prepend with an underscore, so it is treated as an ignored var.
-*/
+   creates a stateful component with a displyName "Counter".
+   requires the make function that spreads the component to define:
+     * let initialState = fun () => state;
+     * let render = fun componentBag => ReasonReact.reactElement;
+ */
+let component = ReasonReact.reducerComponent "Counter";
+
+/*
+   define a function make that takes one prop, startingCount which has a default value of 0.
+   also takes children, which we prepend with an underscore, so it is treated as an ignored var.
+ */
 let make ::startingCount=0 _children => {
-  let handleClick _event {state} _self => {
-    ReasonReact.Update {...state, count: state.count + 1}
-  };
+  let handleClick state => {...state, count: state.count + 1};
   {
     ...component,
-    initialState: fun () => { count: 0, startingCount },
-    render: fun state {update} => {
-      <div onClick=(update handleClick)>
+    initialState: fun () => {count: 0, startingCount},
+    reducer: fun action state =>
+      switch action {
+      | Click => ReasonReact.Update (handleClick state)
+      },
+    render: fun {reduce} =>
+      <div onClick=(reduce (fun _ => Click))>
         (ReasonReact.stringToElement {| Started on \$(state.startingCount). |})
         (ReasonReact.stringToElement "Click Me")
         (ReasonReact.stringToElement {| Clicked \$(state.count) times! |})
       </div>
-    }
   }
-}
-
+};
 /*
-  now, we can conditionally render as a result of state,
-  and bind state mutating functions using updater
-*/
+   now, we can conditionally render as a result of state,
+   and bind state mutating functions using updater
+ */
 ```
 
 This opens up some new abilities to us. We can now store the state of the component close in code to where it's used. It's important to note that from the perspective of the component, even though we've termed it "stateful", no variables are mutated. The component itself treats state as an implementation detail left up to the React library.

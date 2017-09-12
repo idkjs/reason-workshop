@@ -7,28 +7,19 @@ module Problem9Text = {
         ReactDOMRe.Style.make
           /* place the appropriate styles here */
           ();
-
-      <div style />;
+      <div style />
     }
-  }
+  };
 };
 
-type state = {
-  color: string
-};
+type state = {color: string};
 
-let component = ReasonReact.statefulComponent "Problem9";
+let component = ReasonReact.reducerComponent "Problem9";
+
 let make _children => {
   ...component,
-  initialState: fun () => {
-    color: "black"
-  },
-  render: fun {state, update} => {
-    <div>
-      <Problem9Text
-        color=state.color
-        onClick=(update (fun _event {state} => ReasonReact.Update state))
-      />
-    </div>
-  }
+  initialState: fun () => {color: "black"},
+  reducer: fun _action state => ReasonReact.Update state,
+  render: fun {state, reduce} =>
+    <div> <Problem9Text color=state.color onClick=(reduce (fun _ => ())) /> </div>
 };
