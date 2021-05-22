@@ -105,43 +105,44 @@ let problems = [|
   },
 |];
 
-let component = ReasonReact.statelessComponent("Routes");
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...ReactCompat.component,
 
-let make = _children => {
-  ...component,
-  render: _self =>
-    <div className="pure-g" style=containerStyle>
-      <div
-        className="pure-u-1-8"
-        style={ReactDOMRe.Style.make(~background="#f5f2f0", ())}>
-        <ul
-          style={ReactDOMRe.Style.make(
-            ~lineHeight="1.4",
-            ~listStyle="none",
-            ~paddingLeft="15px",
-            (),
-          )}>
+    render: _self =>
+      <div className="pure-g" style=containerStyle>
+        <div
+          className="pure-u-1-8"
+          style={ReactDOMRe.Style.make(~background="#f5f2f0", ())}>
+          <ul
+            style={ReactDOMRe.Style.make(
+              ~lineHeight="1.4",
+              ~listStyle="none",
+              ~paddingLeft="15px",
+              (),
+            )}>
+            {ReasonReact.arrayToElement(
+               Array.map(
+                 ((href, label)) => <li key=href> <a href> label </a> </li>,
+                 links,
+               ),
+             )}
+          </ul>
+        </div>
+        <div className="pure-u-7-8">
           {ReasonReact.arrayToElement(
              Array.map(
-               ((href, label)) => <li key=href> <a href> label </a> </li>,
-               links,
+               ({link, description, problem}) =>
+                 <Route
+                   key=link
+                   path=link
+                   component={createProblemView(description, problem)}
+                   exact=true
+                 />,
+               problems,
              ),
            )}
-        </ul>
-      </div>
-      <div className="pure-u-7-8">
-        {ReasonReact.arrayToElement(
-           Array.map(
-             ({link, description, problem}) =>
-               <Route
-                 key=link
-                 path=link
-                 component={createProblemView(description, problem)}
-                 exact=true
-               />,
-             problems,
-           ),
-         )}
-      </div>
-    </div>,
-};
+        </div>
+      </div>,
+  });

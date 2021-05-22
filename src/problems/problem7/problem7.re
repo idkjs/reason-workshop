@@ -18,12 +18,12 @@ module Shape = {
 
 type state = {shape};
 
-let component = ReasonReact.reducerComponent("Problem4");
-
-let make = _children => {
+[@react.component]
+let make = () => {
   let handleClick = shape => {shape: shape};
-  {
-    ...component,
+  ReactCompat.useRecordApi({
+    ...ReactCompat.component,
+
     initialState: () => {shape: Circle},
     reducer: (action, _state) => ReasonReact.Update(handleClick(action)),
     render: ({ReasonReact.state, reduce}) =>
@@ -43,5 +43,5 @@ let make = _children => {
            <div> {ReasonReact.stringToElement("change me to a square")} </div>
          }}
       </div>,
-  };
+  });
 };

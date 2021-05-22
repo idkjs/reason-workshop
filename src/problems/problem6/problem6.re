@@ -1,6 +1,7 @@
-let component = ReasonReact.statelessComponent("Problem6");
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...ReactCompat.component,
 
-let make = _children => {
-  ...component,
-  render: _self => <div /* replace this with a call to <Square /> */ />,
-};
+    render: _self => <div /* replace this with a call to <Square /> */ />,
+  });

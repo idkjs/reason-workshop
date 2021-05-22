@@ -43,23 +43,24 @@ type action =
   | Click
   | Hover(bool);
 
-let component = ReasonReact.reducerComponent("Problem4");
+[@react.component]
+let make = () =>
+  ReactCompat.useRecordApi({
+    ...ReactCompat.component,
 
-let make = _children => {
-  ...component,
-  initialState: () => {hovered: false, clicked: false},
-  reducer: (action, state) =>
-    switch (action) {
-    | Click => ReasonReact.Update(handleClick(state))
-    | Hover(flag) => ReasonReact.Update(handleHover(flag, state))
+    initialState: () => {hovered: false, clicked: false},
+    reducer: (action, state) =>
+      switch (action) {
+      | Click => ReasonReact.Update(handleClick(state))
+      | Hover(flag) => ReasonReact.Update(handleHover(flag, state))
+      },
+    render: ({state, reduce}) => {
+      let style = switchStyle(state);
+      <div
+        style={ReactDOMRe.Style.combine(boxStyle, style)}
+        onClick={reduce(_ => Click)}
+        onMouseEnter={reduce(_ => Hover(true))}
+        onMouseLeave={reduce(_ => Hover(false))}
+      />;
     },
-  render: ({state, reduce}) => {
-    let style = switchStyle(state);
-    <div
-      style={ReactDOMRe.Style.combine(boxStyle, style)}
-      onClick={reduce(_ => Click)}
-      onMouseEnter={reduce(_ => Hover(true))}
-      onMouseLeave={reduce(_ => Hover(false))}
-    />;
-  },
-};
+  });

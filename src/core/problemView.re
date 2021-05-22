@@ -12,15 +12,16 @@ let paneStyle =
     (),
   );
 
-let component = ReasonReact.statelessComponent("ProblemView");
+[@react.component]
+let make = (~description, ~problem, ()) =>
+  ReactCompat.useRecordApi({
+    ...ReactCompat.component,
 
-let make = (~description, ~problem, _children) => {
-  ...component,
-  render: _self =>
-    <div className="pure-g">
-      <div style=paneStyle className="pure-u-1-2">
-        <ReactMarkdown source=description />
-      </div>
-      <div style=paneStyle className="pure-u-1-2"> {problem()} </div>
-    </div>,
-};
+    render: _self =>
+      <div className="pure-g">
+        <div style=paneStyle className="pure-u-1-2">
+          <ReactMarkdown source=description />
+        </div>
+        <div style=paneStyle className="pure-u-1-2"> {problem()} </div>
+      </div>,
+  });
