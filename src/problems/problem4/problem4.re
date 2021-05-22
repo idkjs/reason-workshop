@@ -51,16 +51,16 @@ let make = () =>
     initialState: () => {hovered: false, clicked: false},
     reducer: (action, state) =>
       switch (action) {
-      | Click => ReasonReact.Update(handleClick(state))
-      | Hover(flag) => ReasonReact.Update(handleHover(flag, state))
+      | Click => Update(handleClick(state))
+      | Hover(flag) => Update(handleHover(flag, state))
       },
-    render: ({state, reduce}) => {
+    render: ({state, send}) => {
       let style = switchStyle(state);
       <div
         style={ReactDOMRe.Style.combine(boxStyle, style)}
-        onClick={reduce(_ => Click)}
-        onMouseEnter={reduce(_ => Hover(true))}
-        onMouseLeave={reduce(_ => Hover(false))}
+        onClick={_ => send(Click)}
+        onMouseEnter={_ => send(Hover(true))}
+        onMouseLeave={_ => send(Hover(false))}
       />;
     },
   });

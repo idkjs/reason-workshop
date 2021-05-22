@@ -20,9 +20,9 @@ let make = () =>
     ...ReactCompat.component,
 
     initialState: () => {color: "black"},
-    reducer: (_action, state) => ReasonReact.Update(state),
-    render: ({state, reduce}) =>
+    reducer: (_action, state) => Update(state),
+    render: ({state, send}) =>
       <div>
-        <Problem9Text color={state.color} onClick={reduce(_ => ())} />
+        <Problem9Text color={state.color} onClick={send(_ => ())} />
       </div>,
   });

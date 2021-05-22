@@ -1,20 +1,7 @@
 module Problem8Inner = {
   [@react.component]
-  let make = () =>
-    ReactCompat.useRecordApi({
-      ...ReactCompat.component,
-
-      render: _self =>
-        <div>
-          {ReasonReact.stringToElement("Problem 8 Inner Component")}
-        </div>,
-    });
+  let make = () => <div> {React.string("Problem 8 Inner Component")} </div>;
 };
 
 [@react.component]
-let make = () =>
-  ReactCompat.useRecordApi({
-    ...ReactCompat.component,
-
-    render: _self => <div> <Problem8Inner /> </div>,
-  });
+let make = () => <div> <Problem8Inner /> </div>;

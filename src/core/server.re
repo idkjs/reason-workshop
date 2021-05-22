@@ -2,7 +2,7 @@ open Express;
 
 open ReactRouter;
 
-type middlewareFn = (Request.t, Response.t, Next.t) => done_;
+type middlewareFn = (Request.t, Response.t, Next.t) => unit;
 
 type method =
   | HEAD

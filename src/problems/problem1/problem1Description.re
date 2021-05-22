@@ -16,7 +16,7 @@ If you open the file `src/problems/problem1/problem1.re` in your editor, you'll 
 /*
   create a component with a displayName "Problem1"
   requires the make function the "spreads" the component to implement:
-    * let render = fun state self => ReasonReact.reactElement;
+    * let render = fun state self => React.element;
   */
 let component = ReasonReact.statelessComponent "Problem1";
 let make children => {
@@ -27,11 +27,11 @@ let make children => {
 }
 ```
 
-We'll touch on modules, records and everything else as we go through this workshop. For now, let's begin by getting some text to render on the screen. Open the file: src/problem1/problem1.re and edit the file so that the render method returns some JSX that will print "ReasonML". Bear in mind that you can't embed a string inside reason's JSX, and must instead make a call to ReasonReact.stringToElement like below:
+We'll touch on modules, records and everything else as we go through this workshop. For now, let's begin by getting some text to render on the screen. Open the file: src/problem1/problem1.re and edit the file so that the render method returns some JSX that will print "ReasonML". Bear in mind that you can't embed a string inside reason's JSX, and must instead make a call to React.string like below:
 
 ```reason
 <div>
-  (ReasonReact.stringToElement "a string to render")
+  (React.string "a string to render")
 </div>
 ```
 |};

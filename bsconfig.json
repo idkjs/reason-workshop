@@ -27,10 +27,16 @@
       ]
     }
   ],
-  "reason" : { "react-jsx" : 3 },
+  "reason": {
+    "react-jsx": 3
+  },
   "bs-dependencies": [
     "bs-express",
-    "reason-react"
+    "reason-react",
+    "reason-react-update",
+    "reason-react-compat"
   ],
-  "bsc-flags": ["-bs-super-errors"]
+  "bsc-flags": [
+    "-bs-super-errors"
+  ]
 }

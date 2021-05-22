@@ -29,22 +29,22 @@ let createProblemView = (description, problem, _) =>
   <ProblemView description problem />;
 
 let links = [|
-  ("/problems/1", ReasonReact.stringToElement("Problem 1")),
-  ("/problems/2", ReasonReact.stringToElement("Problem 2")),
-  ("/problems/3", ReasonReact.stringToElement("Problem 3")),
-  ("/problems/4", ReasonReact.stringToElement("Problem 4")),
-  ("/problems/5", ReasonReact.stringToElement("Problem 5")),
-  ("/problems/6", ReasonReact.stringToElement("Problem 6")),
-  ("/problems/7", ReasonReact.stringToElement("Problem 7")),
-  ("/problems/8", ReasonReact.stringToElement("Problem 8")),
-  ("/problems/9", ReasonReact.stringToElement("Problem 9")),
-  ("/problems/10", ReasonReact.stringToElement("Problem 10")),
+  ("/problems/1", React.string("Problem 1")),
+  ("/problems/2", React.string("Problem 2")),
+  ("/problems/3", React.string("Problem 3")),
+  ("/problems/4", React.string("Problem 4")),
+  ("/problems/5", React.string("Problem 5")),
+  ("/problems/6", React.string("Problem 6")),
+  ("/problems/7", React.string("Problem 7")),
+  ("/problems/8", React.string("Problem 8")),
+  ("/problems/9", React.string("Problem 9")),
+  ("/problems/10", React.string("Problem 10")),
 |];
 
 type problem = {
   link: string,
   description: string,
-  problem: unit => ReasonReact.reactElement,
+  problem: unit => React.element,
 };
 
 let problems = [|
@@ -122,7 +122,7 @@ let make = () =>
               ~paddingLeft="15px",
               (),
             )}>
-            {ReasonReact.arrayToElement(
+            {React.array(
                Array.map(
                  ((href, label)) => <li key=href> <a href> label </a> </li>,
                  links,
@@ -131,15 +131,17 @@ let make = () =>
           </ul>
         </div>
         <div className="pure-u-7-8">
-          {ReasonReact.arrayToElement(
+          {React.array(
              Array.map(
                ({link, description, problem}) =>
                  <Route
                    key=link
                    path=link
-                   component={createProblemView(description, problem)}
-                   exact=true
-                 />,
+                  //  component={createProblemView(description, problem)}
+                  //  exact=true
+                   >
+                   {createProblemView(description, problem)}
+                 </Route>,
                problems,
              ),
            )}

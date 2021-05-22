@@ -24,7 +24,7 @@ type action =
    creates a stateful component with a displyName "Counter".
    requires the make function that spreads the component to define:
      * let initialState = fun () => state;
-     * let render = fun componentBag => ReasonReact.reactElement;
+     * let render = fun componentBag => React.element;
  */
 let component = ReasonReact.reducerComponent "Counter";
 
@@ -39,13 +39,13 @@ let make ::startingCount=0 _children => {
     initialState: fun () => {count: 0, startingCount},
     reducer: fun action state =>
       switch action {
-      | Click => ReasonReact.Update (handleClick state)
+      | Click => Update (handleClick state)
       },
     render: fun {reduce} =>
       <div onClick=(reduce (fun _ => Click))>
-        (ReasonReact.stringToElement {| Started on \$(state.startingCount). |})
-        (ReasonReact.stringToElement "Click Me")
-        (ReasonReact.stringToElement {| Clicked \$(state.count) times! |})
+        (React.string {| Started on \$(state.startingCount). |})
+        (React.string "Click Me")
+        (React.string {| Clicked \$(state.count) times! |})
       </div>
   }
 };

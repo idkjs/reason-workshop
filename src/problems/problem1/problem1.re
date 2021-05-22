@@ -5,7 +5,7 @@ let make = () =>
 
     render: _self =>
       <div
-        /* use the ReasonReact.stringToElement function here to make this component render "ReasonML"  */
+        /* use the React.string function here to make this component render "ReasonML"  */
         /* reason ships with JSX support, similar to React's */
       />,
   });
